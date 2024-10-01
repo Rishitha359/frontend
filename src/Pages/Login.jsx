@@ -20,7 +20,7 @@ const Login = () => {
             toast.error("Password can't be empty");
         }else{
         try {
-            const response = await axios.post('http://localhost:5000/login',{
+            const response = await axios.post('http://localhost:5000/emp',{
                 email : email,
                 password : password
             })
