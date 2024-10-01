@@ -16,12 +16,12 @@
   background-color: #7754f7; 
 }
 
-#head{
-  margin-top: 200px;
+.header{
+  margin-top: 100px;
   font-weight: bolder;
   display: flex;
   justify-content: center; 
-  height: 10vh;
+  height: 15vh;
 }
 
 Form{
@@ -47,7 +47,7 @@ img{
 }
 
 #reg{
-  background-color: #d751f8;
+  background-color: #e979cd;
 }
 
 #lin{

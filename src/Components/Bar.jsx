@@ -31,6 +31,9 @@ const Bar = () => {
           Welcome {user.name} </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link href="/viewTraining">View Trainings</Nav.Link>
+            {user.Role=='Trainer'? <Nav.Link href="/addTraining">Add Trainings</Nav.Link> :
+             <br></br>}
             <Nav.Link href="/" onClick={handleLogout}>Sign Out</Nav.Link>
           </Nav>
         </Container>

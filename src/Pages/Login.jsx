@@ -20,13 +20,12 @@ const Login = () => {
             toast.error("Password can't be empty");
         }else{
         try {
-            const response = await axios.post('http://localhost:5000/emp',{
+            const response = await axios.post('http://localhost:5000/login',{
                 email : email,
                 password : password
             })
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('email', email);
-
             if(response.status === 200){
                 toast.success("Login Successful")
                 nav('/home');

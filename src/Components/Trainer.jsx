@@ -1,7 +1,7 @@
 import { toast,ToastContainer } from 'react-toastify';
 import { Button, Card, Form } from 'react-bootstrap';
 import React, { useState, useEffect} from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import axios from 'axios';
 
 const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
@@ -51,11 +51,17 @@ const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
 const Trainer = () => {
 
     const [user, setUser] = useState({});
+    const [selectedItem, setSelectedItem] = useState('');
+    const token = localStorage.getItem('token');
 
     useEffect(()=> {
       const userDetails = async() => {
         try {
-          const details = await axios.get('http://localhost:5000/trainings');
+          const details = await axios.get('http://localhost:5000/trainings',
+            {
+                headers: { Authorization: `Bearer ${token}` }
+            }
+          );
           setUser(details.data);
         } catch (error) {
           console.log(error);
@@ -64,24 +70,30 @@ const Trainer = () => {
       userDetails();
     },[]);
 
+    const handleSelect = (eventKey) => {
+        setSelectedItem(eventKey);
+      };
+
   return (
     <div>
         <div className='center-container'>
       <Card style={{'width' : '500px', 'border':'none'}}>
               <Form >
-              <Dropdown>
-                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
-                Select the Employee name
-                </Dropdown.Toggle>
-                <Dropdown.Menu as={CustomMenu}>
-                {user.map((item, index)=>(
-                <Dropdown.Item eventKey="index">{item.name}</Dropdown.Item>
-                ))}
-                </Dropdown.Menu>
-            </Dropdown>
+              <h4>Selected Item: {selectedItem}</h4>
+                <DropdownButton id="dropdown-basic-button" title="Select Item" onSelect={handleSelect}>
+                    {user.length > 0 ? (
+                    user.map(item => (
+                        <Dropdown.Item key={item.id} eventKey={item.name}>
+                        {item.name}
+                        </Dropdown.Item>
+                    ))
+                    ) : (
+                    <Dropdown.Item disabled>Loading...</Dropdown.Item>
+                    )}
+                </DropdownButton>
                   <Form.Group>
-                      <Form.Label>Name of the Event</Form.Label>
-                      <Form.Control type='text' placeholder='Enter Name of the Event' ></Form.Control>
+                      <Form.Label>Name of the Training</Form.Label>
+                      <Form.Control type='text' placeholder='Enter Name of the Training' ></Form.Control>
                   </Form.Group>
                   <Button className='mb-30' variant='success' >Add</Button>
               </Form>
