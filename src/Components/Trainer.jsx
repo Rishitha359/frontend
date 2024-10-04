@@ -4,102 +4,13 @@ import React, { useState, useEffect} from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import axios from 'axios';
 
-const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <a
-      href=""
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
-      &#x25bc;
-    </a>
-  ));
-
-  const CustomMenu = React.forwardRef(
-    ({ children, style, className, 'aria-labelledby': labeledBy }, ref) => {
-      const [value, setValue] = useState('');
-  
-      return (
-        <div
-          ref={ref}
-          style={style}
-          className={className}
-          aria-labelledby={labeledBy}
-        >
-          <Form.Control
-            autoFocus
-            className="mx-3 my-2 w-auto"
-            placeholder="Type to filter..."
-            onChange={(e) => setValue(e.target.value)}
-            value={value}
-          />
-          <ul className="list-unstyled">
-            {React.Children.toArray(children).filter(
-              (child) =>
-                !value || child.props.children.toLowerCase().startsWith(value),
-            )}
-          </ul>
-        </div>
-      );
-    },
-  );
-
-
 const Trainer = () => {
 
-    const [user, setUser] = useState({});
-    const [selectedItem, setSelectedItem] = useState('');
-    const token = localStorage.getItem('token');
-
-    useEffect(()=> {
-      const userDetails = async() => {
-        try {
-          const details = await axios.get('http://localhost:5000/trainings',
-            {
-                headers: { Authorization: `Bearer ${token}` }
-            }
-          );
-          setUser(details.data);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-      userDetails();
-    },[]);
-
-    const handleSelect = (eventKey) => {
-        setSelectedItem(eventKey);
-      };
 
   return (
     <div>
-        <div className='center-container'>
-      <Card style={{'width' : '500px', 'border':'none'}}>
-              <Form >
-              <h4>Selected Item: {selectedItem}</h4>
-                <DropdownButton id="dropdown-basic-button" title="Select Item" onSelect={handleSelect}>
-                    {user.length > 0 ? (
-                    user.map(item => (
-                        <Dropdown.Item key={item.id} eventKey={item.name}>
-                        {item.name}
-                        </Dropdown.Item>
-                    ))
-                    ) : (
-                    <Dropdown.Item disabled>Loading...</Dropdown.Item>
-                    )}
-                </DropdownButton>
-                  <Form.Group>
-                      <Form.Label>Name of the Training</Form.Label>
-                      <Form.Control type='text' placeholder='Enter Name of the Training' ></Form.Control>
-                  </Form.Group>
-                  <Button className='mb-30' variant='success' >Add</Button>
-              </Form>
-              </Card>
-              <ToastContainer/>
-    </div></div>
+      
+    </div>
   )
 }
 

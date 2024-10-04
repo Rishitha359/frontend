@@ -5,6 +5,10 @@ import Home from './Pages/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import TrainingDetails from './Components/TrainingDetails';
 import AddTrainings from './Pages/AddTrainings';
+import AddEmployee from './Pages/AddEmployee';
+import AdminTraining from './Components/AdminTraining'
+import ViewScore from './Pages/ViewScore';
+import AdminScore from './Pages/AdminScore'
 
 function App() {
 
@@ -17,6 +21,10 @@ function App() {
     <Route path='/home' element={auth? <Home/> : <Login/>}></Route>
     <Route path='/viewTraining' element={auth? <TrainingDetails/> : <Login/>}></Route>
     <Route path='/addTraining' element={auth? <AddTrainings/> : <Login/>}></Route>
+    <Route path='/addEmployee' element={auth? <AddEmployee/> : <Login/>}></Route>
+    <Route path='/allTraining' element={auth? <AdminTraining/> : <Login/>}></Route>
+    <Route path='/viewScore/:id' element={auth? <ViewScore/> : <Login/>}></Route>
+    <Route path='/viewScores/:id' element={auth? <AdminScore/> : <Login/>}></Route>
    </Routes>
    </BrowserRouter>
   );
