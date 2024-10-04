@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Container, Button, Form } from 'react-bootstrap';
 import Bar from '../Components/Bar';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -67,13 +67,18 @@ const AdminScores = () => {
   });
 
   return (
-    <div>
+    <div style={{ backgroundColor: '#f8f9fa', padding: '20px' }}>
       <Bar />
       <ToastContainer />
-      <h2 id='head' className="text-center">Training Evaluations</h2>
+      <h2 id='head' className="text-center" style={{ marginBottom: '20px', color: '#343a40' }}>Training Evaluations</h2>
       <Container>
-        <div className="filter-container mb-3">
-          <Form.Select onChange={(e) => setSelectedEmployee(e.target.value)} defaultValue="">
+        {/* Filter Section */}
+        <div className="filter-container mb-3" style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px' }}>
+          <Form.Select 
+            onChange={(e) => setSelectedEmployee(e.target.value)} 
+            defaultValue="" 
+            style={{ flex: 1, marginRight: '10px', padding: '10px', borderRadius: '5px', border: '1px solid #ced4da' }}
+          >
             <option value="">Select Employee</option>
             {employees.map((employee) => (
               <option key={employee.id} value={employee.id}>
@@ -82,7 +87,11 @@ const AdminScores = () => {
             ))}
           </Form.Select>
 
-          <Form.Select onChange={(e) => setSelectedTraining(e.target.value)} defaultValue="">
+          <Form.Select 
+            onChange={(e) => setSelectedTraining(e.target.value)} 
+            defaultValue="" 
+            style={{ flex: 1, marginLeft: '10px', padding: '10px', borderRadius: '5px', border: '1px solid #ced4da' }}
+          >
             <option value="">Select Training</option>
             {trainings.map((training) => (
               <option key={training.id} value={training.id}>
@@ -92,8 +101,9 @@ const AdminScores = () => {
           </Form.Select>
         </div>
 
+        {/* Score Table */}
         <div className="score-table-container">
-          <Table striped bordered hover responsive className="table-sm">
+          <Table striped bordered hover responsive className="table-sm" style={{ backgroundColor: '#ffffff' }}>
             <thead className="table-dark">
               <tr>
                 <th>S.No</th>
@@ -128,10 +138,14 @@ const AdminScores = () => {
             </tbody>
           </Table>
         </div>
+
+        {/* Back Button */}
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
+          <Button style={{ backgroundColor: '#007bff', border: 'none', color: '#fff', padding: '10px 20px' }}>
+            <Link id='lin' to={`/allTraining`} style={{ color: '#fff', textDecoration: 'none' }}>Back</Link>
+          </Button>
+        </div>
       </Container>
-      <Button style={{ marginLeft: '1000px' }}>
-        <Link id='lin' to={`/allTraining`}>Back</Link>
-      </Button>
     </div>
   );
 };
