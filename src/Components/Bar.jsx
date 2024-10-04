@@ -65,6 +65,9 @@ const Bar = () => {
                 <Nav.Link href="/allTraining" style={navLinkStyle} onMouseEnter={e => e.target.style = navLinkHoverStyle} onMouseLeave={e => e.target.style = navLinkStyle}>
                   View Trainings
                 </Nav.Link>
+                <Nav.Link href="/viewScore" style={navLinkStyle} onMouseEnter={e => e.target.style = navLinkHoverStyle} onMouseLeave={e => e.target.style = navLinkStyle}>
+                  View Scores
+                </Nav.Link>
                 <Nav.Link href="/addTraining" style={navLinkStyle} onMouseEnter={e => e.target.style = navLinkHoverStyle} onMouseLeave={e => e.target.style = navLinkStyle}>
                   Add Trainings
                 </Nav.Link>

@@ -9,6 +9,7 @@ import AddEmployee from './Pages/AddEmployee';
 import AdminTraining from './Components/AdminTraining'
 import ViewScore from './Pages/ViewScore';
 import AdminScore from './Pages/AdminScore'
+import AdminScores from './Pages/AdminScores';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
     <Route path='/allTraining' element={auth? <AdminTraining/> : <Login/>}></Route>
     <Route path='/viewScore/:id' element={auth? <ViewScore/> : <Login/>}></Route>
     <Route path='/viewScores/:id' element={auth? <AdminScore/> : <Login/>}></Route>
+    <Route path='/viewScore' element={auth? <AdminScores/> : <Login/>}></Route>
    </Routes>
    </BrowserRouter>
   );
